@@ -19,9 +19,9 @@ export class GetExchangeRate
   public async execute(input: GetExchangeRateInput): Promise<ExchangeRate> {
     const from = await this.findCurrency.execute(input.from);
     const to = await this.findCurrency.execute(input.to);
-    const date = ReferenceDate.fromString(input.date);
     if (!from || !to) throw new CurrencyNotFouncException();
 
+    const date = input.date ? ReferenceDate.fromString(input.date) : undefined;
     return this.exchangeRepository.get(from, to, date);
   }
 }

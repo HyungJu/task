@@ -26,13 +26,13 @@ export class ExchangeRepositoryImpl implements ExchangeRepository {
   public async get(
     from: Currency,
     to: Currency,
-    date: ReferenceDate,
+    date?: ReferenceDate,
   ): Promise<ExchangeRate> {
     const document = await this.exchangeModel
       .findOne({
         from: from._id,
         to: to._id,
-        date: date.toString(),
+        date: date,
       })
       .sort({ date: -1 })
       .populate(['from', 'to'])

@@ -8,6 +8,6 @@ export class GetExchangeRateInput {
   @Field()
   to!: string;
 
-  @Field()
-  date!: string;
+  @Field({ nullable: true })
+  date?: string;
 }

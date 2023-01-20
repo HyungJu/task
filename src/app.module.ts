@@ -9,7 +9,9 @@ import { ExchangeModule } from './exchange/exchange.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/buzznbyd'),
+    MongooseModule.forRoot('mongodb://localhost/buzznbyd', {
+      ignoreUndefined: true,
+    }),
     CurrencyModule,
     ExchangeModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
