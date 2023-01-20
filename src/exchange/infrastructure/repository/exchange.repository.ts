@@ -14,7 +14,8 @@ export class ExchangeRepositoryImpl implements ExchangeRepository {
   }
 
   public async create(exchangeRate: ExchangeRate): Promise<ExchangeRate> {
-    return this.exchangeModel.create(exchangeRate);
+    await this.exchangeModel.create(exchangeRate);
+    return exchangeRate;
   }
 
   public async get(from: Currency, to: Currency): Promise<ExchangeRate> {
