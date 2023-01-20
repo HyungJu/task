@@ -22,6 +22,10 @@ export class GetExchangeRate
     if (!from || !to) throw new CurrencyNotFouncException();
 
     const date = input.date ? ReferenceDate.fromString(input.date) : undefined;
+
+    if (from.code == to.code)
+      return new ExchangeRate(from, to, 1, date ?? ReferenceDate.now());
+
     return this.exchangeRepository.get(from, to, date);
   }
 }

@@ -6,6 +6,7 @@ import { DeleteExchangeRateInput } from '@exchange/application/dtos/delete-excha
 import { CurrencyNotFouncException } from '@exchange/domain/exceptions/CurrencyNotFouncException';
 import { FindCurrency } from '@currency/application/services/find-currency';
 import { ReferenceDate } from '@exchange/domain/models/reference-date.model';
+import { GetExchangeRate } from '@exchange/application/services/get-exchange-rate';
 
 @Injectable()
 export class DeleteExchangeRate
@@ -14,6 +15,7 @@ export class DeleteExchangeRate
   constructor(
     private exchangeRepository: ExchangeRepositoryImpl,
     private findCurrency: FindCurrency,
+    private getExchangeRate: GetExchangeRate,
   ) {}
 
   public async execute(dto: DeleteExchangeRateInput): Promise<ExchangeRate> {
@@ -22,6 +24,7 @@ export class DeleteExchangeRate
     const date = ReferenceDate.fromString(dto.date);
 
     if (!from || !to) throw new CurrencyNotFouncException();
+    if (from.code == to.code) return this.getExchangeRate.execute(dto);
 
     return this.exchangeRepository.delete(from, to, date);
   }

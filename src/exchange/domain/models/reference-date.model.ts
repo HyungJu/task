@@ -16,6 +16,10 @@ export class ReferenceDate {
     return new ReferenceDate(new Date(referenceDate));
   }
 
+  static now() {
+    return new ReferenceDate(new Date());
+  }
+
   public toString(): string {
     return format(this.date, 'yyyy-MM-dd');
   }
