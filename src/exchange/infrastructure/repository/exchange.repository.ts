@@ -17,10 +17,17 @@ export class ExchangeRepositoryImpl implements ExchangeRepository {
 
   public async create(exchangeRate: ExchangeRate): Promise<ExchangeRate> {
     const document = ExchangeMapper.toDocument(exchangeRate);
-    const exchange = await this.exchangeModel.create(document);
-    await exchange.populate(['from', 'to']);
+    await this.exchangeModel.updateOne(
+      {
+        from: document.from,
+        to: document.to,
+        date: document.date,
+      },
+      document,
+      { upsert: true },
+    );
 
-    return ExchangeMapper.toModel(exchange);
+    return exchangeRate;
   }
 
   public async get(
