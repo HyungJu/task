@@ -3,7 +3,10 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ExchangeRepository } from '../../domain/exchange.repository';
 import { ExchangeRate } from '../../domain/models/exchange.model';
 import { Currency } from '@currency/domain/models/currency.model';
-import { ExchangeModel } from '@exchange/infrastructure/schemas/exchange.schema';
+import {
+  ExchangeModel,
+  ExchangeRateDocument,
+} from '@exchange/infrastructure/schemas/exchange.schema';
 import { ExchangeMapper } from '@exchange/infrastructure/mappers';
 import { ReferenceDate } from '@exchange/domain/models/reference-date.model';
 
@@ -35,6 +38,30 @@ export class ExchangeRepositoryImpl implements ExchangeRepository {
     to: Currency,
     date?: ReferenceDate,
   ): Promise<ExchangeRate> {
+    const document = await this._get(from, to, date);
+    return ExchangeMapper.toModel(document);
+  }
+
+  public async delete(
+    from: Currency,
+    to: Currency,
+    date: ReferenceDate,
+  ): Promise<ExchangeRate> {
+    const document = await this._get(from, to, date);
+    await this.exchangeModel.deleteOne({
+      from: from._id,
+      to: to._id,
+      date: date.toString(),
+    });
+
+    return ExchangeMapper.toModel(document);
+  }
+
+  private async _get(
+    from: Currency,
+    to: Currency,
+    date?: ReferenceDate,
+  ): Promise<ExchangeRateDocument> {
     const document = await this.exchangeModel
       .findOne({
         from: from._id,
@@ -46,10 +73,7 @@ export class ExchangeRepositoryImpl implements ExchangeRepository {
       .exec();
 
     if (!document) throw new NotFoundException();
-    return ExchangeMapper.toModel(document);
-  }
 
-  public async delete(from: Currency, to: Currency): Promise<void> {
-    await this.exchangeModel.deleteMany({ from: from._id, to: to._id });
+    return document;
   }
 }

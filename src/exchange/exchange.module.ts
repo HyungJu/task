@@ -7,6 +7,7 @@ import { ExchangeRepositoryImpl } from './infrastructure/repository/exchange.rep
 import { CreateExchangeRate } from './application/services/create-exchange-rate';
 import { CurrencyModule } from '../currency/currency.module';
 import { GetExchangeRate } from './application/services/get-exchange-rate';
+import { DeleteExchangeRate } from '@exchange/application/services/delete-exchange-rate';
 
 @GqlModule({
   imports: [
@@ -14,7 +15,12 @@ import { GetExchangeRate } from './application/services/get-exchange-rate';
     CurrencyModule,
   ],
   providers: [ExchangeRepositoryImpl],
-  usecases: [GetAllExchangeRates, CreateExchangeRate, GetExchangeRate],
+  usecases: [
+    GetAllExchangeRates,
+    CreateExchangeRate,
+    GetExchangeRate,
+    DeleteExchangeRate,
+  ],
   resolvers: [ExchangeResolver],
   controllers: [],
 })

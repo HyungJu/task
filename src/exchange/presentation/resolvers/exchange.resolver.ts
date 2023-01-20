@@ -6,6 +6,8 @@ import { ExchangeRateSchema } from '../schemas/exchange-rate.dto';
 import { GetExchangeRate } from '../../application/services/get-exchange-rate';
 import { GetExchangeRateInput } from '../schemas/get-exchange-rate';
 import { ExchangeSchemaMapper } from '@exchange/presentation/mapper';
+import { DeleteExchangeRateSchema } from '@exchange/presentation/schemas/delete-exchange';
+import { DeleteExchangeRate } from '@exchange/application/services/delete-exchange-rate';
 
 @Resolver(() => ExchangeRateSchema)
 export class ExchangeResolver {
@@ -13,6 +15,7 @@ export class ExchangeResolver {
     private getAllExchangeRatesService: GetAllExchangeRates,
     private createExchangeRateService: CreateExchangeRate,
     private getExchangeRateService: GetExchangeRate,
+    private deleteExchangeRateService: DeleteExchangeRate,
   ) {}
 
   @Query(() => [ExchangeRateSchema], { nullable: 'items' })
@@ -37,6 +40,15 @@ export class ExchangeResolver {
   ): Promise<ExchangeRateSchema> {
     return ExchangeSchemaMapper.toSchema(
       await this.createExchangeRateService.execute(input),
+    );
+  }
+
+  @Mutation((returns) => ExchangeRateSchema)
+  async deleteExchangeRate(
+    @Args('input') input: DeleteExchangeRateSchema,
+  ): Promise<ExchangeRateSchema> {
+    return ExchangeSchemaMapper.toSchema(
+      await this.deleteExchangeRateService.execute(input),
     );
   }
 }

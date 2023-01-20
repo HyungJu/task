@@ -31,6 +31,7 @@ type Mutation {
   createCurrency(createCurrencyInput: CreateCurrencyInput!): CurrencySchema!
   deleteCurrency(code: String!): Boolean!
   createExchangeRate(input: CreateExchangeRateSchema!): ExchangeRateSchema!
+  deleteExchangeRate(input: DeleteExchangeRateSchema!): ExchangeRateSchema!
 }
 
 input CreateCurrencyInput {
@@ -43,4 +44,10 @@ input CreateExchangeRateSchema {
   to: String!
   rate: Float!
   date: String
+}
+
+input DeleteExchangeRateSchema {
+  from: String!
+  to: String!
+  date: String!
 }
