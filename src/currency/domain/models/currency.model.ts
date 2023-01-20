@@ -10,4 +10,8 @@ export class Currency {
     this.code = code;
     this.name = name;
   }
+
+  public isEqual(currency: Currency): boolean {
+    return !!(this._id && currency._id && this._id == currency._id);
+  }
 }

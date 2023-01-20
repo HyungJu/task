@@ -24,7 +24,7 @@ export class DeleteExchangeRate
     const date = ReferenceDate.fromString(dto.date);
 
     if (!from || !to) throw new CurrencyNotFouncException();
-    if (from.code == to.code) return this.getExchangeRate.execute(dto);
+    if (from.isEqual(to)) return this.getExchangeRate.execute(dto);
 
     return this.exchangeRepository.delete(from, to, date);
   }

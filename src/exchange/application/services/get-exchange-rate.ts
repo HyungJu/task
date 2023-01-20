@@ -23,9 +23,8 @@ export class GetExchangeRate
 
     const date = input.date ? ReferenceDate.fromString(input.date) : undefined;
 
-    if (from.code == to.code)
+    if (from.isEqual(to))
       return new ExchangeRate(from, to, 1, date ?? ReferenceDate.now());
-
     return this.exchangeRepository.get(from, to, date);
   }
 }

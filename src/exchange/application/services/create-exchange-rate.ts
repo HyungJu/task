@@ -23,7 +23,7 @@ export class CreateExchangeRate
     const to = await this.findCurrency.execute(dto.to);
 
     if (!from || !to) throw new CurrencyNotFouncException();
-    if (from.code == to.code) return this.getExchangeRate.execute(dto);
+    if (from.isEqual(to)) return this.getExchangeRate.execute(dto);
 
     const referenceDate = dto.date
       ? ReferenceDate.fromString(dto.date)
