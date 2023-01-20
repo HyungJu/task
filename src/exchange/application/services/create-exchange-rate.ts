@@ -1,8 +1,9 @@
 import { ApplicationService } from '../../../core/application-service';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ExchangeRate } from '../../domain/models/exchange.model';
 import { ExchangeRepositoryImpl } from '../../infrastructure/repository/exchange.repository';
 import { FindCurrency } from '../../../currency/application/services/find-currency';
+import { CurrencyNotFouncException } from '@exchange/domain/exceptions/CurrencyNotFouncException';
 
 export class CreateExchangeRateDto {
   from: string;
@@ -24,13 +25,12 @@ export class CreateExchangeRate
     const from = await this.findCurrency.execute(dto.from);
     const to = await this.findCurrency.execute(dto.to);
 
-    if (!from || !to) throw new NotFoundException();
+    if (!from || !to) throw new CurrencyNotFouncException();
 
     return this.exchangeRepository.create({
+      ...dto,
       from,
       to,
-      rate: dto.rate,
-      date: dto.date,
     });
   }
 }
