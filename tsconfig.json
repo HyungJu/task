@@ -9,7 +9,18 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "paths": {
+      "@currency/*": [
+        "currency/*"
+      ],
+      "@exchange/*": [
+        "exchange/*"
+      ],
+      "@core/*": [
+        "core/*"
+      ]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

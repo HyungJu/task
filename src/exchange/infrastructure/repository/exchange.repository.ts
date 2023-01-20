@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ExchangeRepository } from '../../domain/exchange.repository';
 import { ExchangeModel } from '../schemas/exchange.schema';
 import { ExchangeRate } from '../../domain/models/exchange.model';
+import { Currency } from '@currency/domain/models/currency.model';
 
 @Injectable()
 export class ExchangeRepositoryImpl implements ExchangeRepository {
