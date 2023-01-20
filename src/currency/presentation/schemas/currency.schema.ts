@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class CurrencyGqlSchema {
+export class CurrencySchema {
   @Field()
   code!: string;
 

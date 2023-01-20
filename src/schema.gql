@@ -2,12 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CurrencyGqlSchema {
+type CurrencySchema {
   code: String!
   name: String!
 }
 
 type Query {
-  currency(code: String!): CurrencyGqlSchema
-  currencies: [CurrencyGqlSchema!]!
+  currency(code: String!): CurrencySchema
+  currencies: [CurrencySchema!]!
 }

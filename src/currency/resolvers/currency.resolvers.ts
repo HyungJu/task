@@ -1,21 +1,21 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { CurrencyGqlSchema } from '../schemas/currency.gql.schema';
-import { FindCurrency } from '../services/find-currency';
-import { GetAllCurrencies } from '../services/get-all-currencies';
+import { FindCurrency } from '../application/services/find-currency';
+import { GetAllCurrencies } from '../application/services/get-all-currencies';
+import { CurrencySchema } from '../presentation/schemas/currency.schema';
 
-@Resolver((of) => CurrencyGqlSchema)
+@Resolver((of) => CurrencySchema)
 export class CurrencyResolver {
   constructor(
     private findCurrency: FindCurrency,
     private getAllCurrencies: GetAllCurrencies,
   ) {}
 
-  @Query((returns) => CurrencyGqlSchema, { nullable: true })
+  @Query((returns) => CurrencySchema, { nullable: true })
   async currency(@Args('code', { type: () => String }) code: string) {
     return this.findCurrency.execute(code);
   }
 
-  @Query(() => [CurrencyGqlSchema])
+  @Query(() => [CurrencySchema])
   async currencies() {
     return this.getAllCurrencies.execute();
   }
