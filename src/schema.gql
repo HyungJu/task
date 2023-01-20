@@ -7,17 +7,38 @@ type CurrencySchema {
   name: String!
 }
 
+type ExchangeRateSchema {
+  from: CurrencySchema!
+  to: CurrencySchema!
+  rate: Float!
+  date: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   currency(code: String!): CurrencySchema
   currencies: [CurrencySchema!]!
+  exchangeRates: [ExchangeRateSchema!]!
 }
 
 type Mutation {
   createCurrency(createCurrencyInput: CreateCurrencyInput!): CurrencySchema!
   deleteCurrency(code: String!): Boolean!
+  createExchangeRate(input: CreateExchangeRateSchema!): ExchangeRateSchema!
 }
 
 input CreateCurrencyInput {
   code: String!
   name: String!
+}
+
+input CreateExchangeRateSchema {
+  from: String!
+  to: String!
+  rate: Float!
+  date: DateTime!
 }

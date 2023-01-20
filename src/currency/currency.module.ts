@@ -17,5 +17,6 @@ import { DeleteCurrency } from './application/services/delete-currency';
   usecases: [CreateCurrency, FindCurrency, GetAllCurrencies, DeleteCurrency],
   resolvers: [CurrencyResolver],
   controllers: [],
+  exports: [FindCurrency],
 })
 export class CurrencyModule {}
