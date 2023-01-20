@@ -26,4 +26,8 @@ export class ExchangeRepositoryImpl implements ExchangeRepository {
       .sort({ date: -1 })
       .populate(['from', 'to']);
   }
+
+  public async delete(from: Currency, to: Currency): Promise<void> {
+    await this.exchangeModel.deleteMany({ from: from._id, to: to._id });
+  }
 }
