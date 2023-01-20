@@ -5,6 +5,6 @@ export class ExchangeRate {
     readonly from: Currency,
     readonly to: Currency,
     readonly rate: number,
-    readonly date: Date,
+    readonly date: Date = new Date(),
   ) {}
 }
