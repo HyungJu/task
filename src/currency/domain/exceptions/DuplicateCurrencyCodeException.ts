@@ -1,7 +1,7 @@
-import { HttpException } from '@nestjs/common';
+import { DomainException } from '@core/exception/DomainException';
 
-export class DuplicateCurrencyCodeException extends HttpException {
+export class DuplicateCurrencyCodeException extends DomainException {
   constructor() {
-    super('Duplicate Currency Code', 400);
+    super('Duplicated Currency Code');
   }
 }
