@@ -4,11 +4,7 @@ import { ExchangeRate } from '../../domain/models/exchange.model';
 import { ExchangeRepositoryImpl } from '../../infrastructure/repository/exchange.repository';
 import { FindCurrency } from '../../../currency/application/services/find-currency';
 import { CurrencyNotFouncException } from '@exchange/domain/exceptions/CurrencyNotFouncException';
-
-export type GetExchangeRateInput = {
-  from: string;
-  to: string;
-};
+import { GetExchangeRateInput } from '@exchange/application/dtos/get-exchange-rate.dto';
 
 @Injectable()
 export class GetExchangeRate
