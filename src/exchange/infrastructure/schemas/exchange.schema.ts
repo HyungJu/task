@@ -8,11 +8,14 @@ export type ExchangeRateDocument = {
   date: Date;
 };
 
-export const ExchangeSchema = new Schema<ExchangeRateDocument>({
-  from: { type: Schema.Types.ObjectId, required: true, ref: 'Currency' },
-  to: { type: Schema.Types.ObjectId, required: true, ref: 'Currency' },
-  rate: { type: Number, required: true },
-  date: { type: Date, required: true },
-});
+export const ExchangeSchema = new Schema<ExchangeRateDocument>(
+  {
+    from: { type: Schema.Types.ObjectId, required: true, ref: 'Currency' },
+    to: { type: Schema.Types.ObjectId, required: true, ref: 'Currency' },
+    rate: { type: Number, required: true },
+    date: { type: Date, required: true },
+  },
+  { timestamps: true },
+);
 
 export type ExchangeModel = Model<ExchangeRateDocument>;

@@ -6,9 +6,12 @@ export type CurrencyDocument = {
   name: string;
 };
 
-export const CurrencySchema = new Schema<CurrencyDocument>({
-  code: { type: String, required: true, unique: true },
-  name: { type: String, required: true },
-});
+export const CurrencySchema = new Schema<CurrencyDocument>(
+  {
+    code: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+  },
+  { timestamps: true },
+);
 
 export type CurrencyModel = Model<CurrencyDocument>;
