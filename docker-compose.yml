@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo
+  api:
+    build:
+      context: .
+    ports:
+      - "5110:5110"
+    depends_on:
+      - mongo
+volumes:
+  mongo:
