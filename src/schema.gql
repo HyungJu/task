@@ -11,3 +11,12 @@ type Query {
   currency(code: String!): CurrencySchema
   currencies: [CurrencySchema!]!
 }
+
+type Mutation {
+  createCurrency(createCurrencyInput: CreateCurrencyInput!): CurrencySchema!
+}
+
+input CreateCurrencyInput {
+  code: String!
+  name: String!
+}
