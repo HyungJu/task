@@ -22,7 +22,13 @@ scalar DateTime
 type Query {
   currency(code: String!): CurrencySchema
   currencies: [CurrencySchema!]!
-  exchangeRates: [ExchangeRateSchema!]!
+  exchangeRates: [ExchangeRateSchema]!
+  exchangeRate(input: GetExchangeRateInput!): ExchangeRateSchema
+}
+
+input GetExchangeRateInput {
+  from: String!
+  to: String!
 }
 
 type Mutation {

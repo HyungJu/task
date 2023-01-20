@@ -10,6 +10,8 @@ export class GetAllExchangeRates
   constructor(private exchangeRepository: ExchangeRepositoryImpl) {}
 
   public async execute(): Promise<ExchangeRate[]> {
-    return this.exchangeRepository.findAll();
+    const result = await this.exchangeRepository.findAll();
+    console.log(result);
+    return result;
   }
 }
