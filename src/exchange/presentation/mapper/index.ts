@@ -4,8 +4,8 @@ import { ExchangeRateSchema } from '@exchange/presentation/schemas/exchange-rate
 export class ExchangeSchemaMapper {
   public static toSchema(exchangeRate: ExchangeRate): ExchangeRateSchema {
     return {
-      from: exchangeRate.from,
-      to: exchangeRate.to,
+      src: exchangeRate.from.code,
+      tgt: exchangeRate.to.code,
       rate: exchangeRate.rate,
       date: exchangeRate.date.toString(),
     };
