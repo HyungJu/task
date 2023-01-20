@@ -19,9 +19,7 @@ export class CreateCurrency
     const currencyExists = await this.currencyRepository.findByCode(dto.code);
     if (currencyExists) throw new DuplicateCurrencyCodeException();
 
-    const currency = new Currency(dto.code, dto.name);
-    await this.currencyRepository.insert(currency);
-
-    return currency;
+    const currency = new Currency(null, dto.code, dto.name);
+    return this.currencyRepository.insert(currency);
   }
 }

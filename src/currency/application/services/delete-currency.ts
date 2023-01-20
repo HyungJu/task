@@ -7,11 +7,7 @@ export class DeleteCurrency implements ApplicationService<string, boolean> {
   constructor(private currencyRepository: CurrencyRepositoryImpl) {}
 
   public async execute(code: string) {
-    try {
-      await this.currencyRepository.removeByCode(code);
-      return true;
-    } catch (e) {
-      return false;
-    }
+    await this.currencyRepository.removeByCode(code);
+    return true;
   }
 }

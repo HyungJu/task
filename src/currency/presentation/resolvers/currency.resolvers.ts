@@ -16,17 +16,21 @@ export class CurrencyResolver {
   ) {}
 
   @Query((returns) => CurrencySchema, { nullable: true })
-  async currency(@Args('code', { type: () => String }) code: string) {
+  async currency(
+    @Args('code', { type: () => String }) code: string,
+  ): Promise<CurrencySchema> {
     return this.findCurrencyService.execute(code);
   }
 
   @Query(() => [CurrencySchema])
-  async currencies() {
+  async currencies(): Promise<CurrencySchema[]> {
     return this.getAllCurrenciesService.execute();
   }
 
   @Mutation((returns) => CurrencySchema)
-  createCurrency(@Args('createCurrencyInput') input: CreateCurrencyInput) {
+  async createCurrency(
+    @Args('createCurrencyInput') input: CreateCurrencyInput,
+  ): Promise<CurrencySchema> {
     return this.createCurrencyService.execute(input);
   }
 

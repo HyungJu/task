@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Currency } from '../../domain/models/currency.model';
 import { CurrencyModel } from '../schemas/currency.schema';
 import { CurrencyRepository } from '../../domain/currency.repository';
+import { CurrencyMapper } from '../mapper';
 
 @Injectable()
 export class CurrencyRepositoryImpl implements CurrencyRepository {
@@ -13,14 +14,16 @@ export class CurrencyRepositoryImpl implements CurrencyRepository {
   }
 
   public async insert(currency: Currency): Promise<Currency> {
-    return this.currencyModel.create(currency);
+    const schema = CurrencyMapper.toSchema(currency);
+
+    return CurrencyMapper.toModel(await this.currencyModel.create(schema));
   }
 
   public async findByCode(code: string): Promise<Currency | null> {
     const currency = await this.currencyModel.findOne({ code });
     if (!currency) return null;
 
-    return currency;
+    return CurrencyMapper.toModel(currency);
   }
 
   public async removeByCode(code: string) {

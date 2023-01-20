@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 @Schema()
-class Currency {
+export class Currency {
   @Prop({ unique: true, index: true })
   code!: string;
 
