@@ -23,6 +23,7 @@ export class ExchangeRepositoryImpl implements ExchangeRepository {
         from: from._id,
         to: to._id,
       })
+      .sort({ date: -1 })
       .populate(['from', 'to']);
   }
 }
