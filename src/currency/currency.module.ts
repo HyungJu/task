@@ -24,6 +24,6 @@ import { GetCurrency } from '@currency/application/services/get-currency';
   ],
   resolvers: [CurrencyResolver],
   controllers: [],
-  exports: [FindCurrency],
+  exports: [FindCurrency, GetCurrency],
 })
 export class CurrencyModule {}

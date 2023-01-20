@@ -4,7 +4,7 @@ import { ExchangeRate } from '../../domain/models/exchange.model';
 import { ExchangeRepositoryImpl } from '../../infrastructure/repository/exchange.repository';
 
 @Injectable()
-export class GetAllExchangeRates
+export class FindAllExchangeRates
   implements ApplicationService<void, ExchangeRate[]>
 {
   constructor(private exchangeRepository: ExchangeRepositoryImpl) {}

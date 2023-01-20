@@ -1,4 +1,4 @@
-export type CreateExchangeRateInput = {
+export type UpsertExchangeRateCommand = {
   from: string;
   to: string;
   rate: number;

@@ -1,3 +1,3 @@
 export interface ApplicationService<I, O> {
-  execute(input: I): Promise<O> | O;
+  execute(command: I): Promise<O> | O;
 }

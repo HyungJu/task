@@ -1,4 +1,4 @@
-export type DeleteExchangeRateInput = {
+export type DeleteExchangeRateCommand = {
   from: string;
   to: string;
   date: string;

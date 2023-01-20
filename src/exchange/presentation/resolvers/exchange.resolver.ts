@@ -1,18 +1,18 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { GetAllExchangeRates } from '../../application/services/get-all-exchange-rates';
-import { CreateExchangeRate } from '../../application/services/create-exchange-rate';
+import { FindAllExchangeRates } from '../../application/services/find-all-exchange-rates.service';
+import { UpsertExchangeRate } from '../../application/services/upsert-exchange-rate.service';
 import { CreateExchangeRateSchema } from '../schemas/create-exchange';
 import { ExchangeRateSchema } from '../schemas/exchange-rate.dto';
-import { GetExchangeRate } from '../../application/services/get-exchange-rate';
+import { GetExchangeRate } from '../../application/services/get-exchange-rate.service';
 import { ExchangeSchemaMapper } from '@exchange/presentation/mapper';
 import { DeleteExchangeRateSchema } from '@exchange/presentation/schemas/delete-exchange';
-import { DeleteExchangeRate } from '@exchange/application/services/delete-exchange-rate';
+import { DeleteExchangeRate } from '@exchange/application/services/delete-exchange-rate.service';
 
 @Resolver(() => ExchangeRateSchema)
 export class ExchangeResolver {
   constructor(
-    private getAllExchangeRatesService: GetAllExchangeRates,
-    private createExchangeRateService: CreateExchangeRate,
+    private getAllExchangeRatesService: FindAllExchangeRates,
+    private createExchangeRateService: UpsertExchangeRate,
     private getExchangeRateService: GetExchangeRate,
     private deleteExchangeRateService: DeleteExchangeRate,
   ) {}

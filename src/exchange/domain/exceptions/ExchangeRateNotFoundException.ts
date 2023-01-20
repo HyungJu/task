@@ -1,5 +1,7 @@
-export class ExchangeRateNotFoundException extends Error {
+import { DomainException } from '@core/exception/DomainException';
+
+export class ExchangeRateNotFoundException extends DomainException {
   constructor() {
-    super('Exchanfge Rate Not Found');
+    super('Exchange Rate Not Found');
   }
 }

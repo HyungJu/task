@@ -1,13 +1,13 @@
 import { MongooseModule } from '@nestjs/mongoose';
 import { GqlModule } from '../core/module.decorator';
 import { ExchangeSchema } from './infrastructure/schemas/exchange.schema';
-import { GetAllExchangeRates } from './application/services/get-all-exchange-rates';
+import { FindAllExchangeRates } from './application/services/find-all-exchange-rates.service';
 import { ExchangeResolver } from './presentation/resolvers/exchange.resolver';
 import { ExchangeRepositoryImpl } from './infrastructure/repository/exchange.repository';
-import { CreateExchangeRate } from './application/services/create-exchange-rate';
+import { UpsertExchangeRate } from './application/services/upsert-exchange-rate.service';
 import { CurrencyModule } from '../currency/currency.module';
-import { GetExchangeRate } from './application/services/get-exchange-rate';
-import { DeleteExchangeRate } from '@exchange/application/services/delete-exchange-rate';
+import { GetExchangeRate } from './application/services/get-exchange-rate.service';
+import { DeleteExchangeRate } from '@exchange/application/services/delete-exchange-rate.service';
 
 @GqlModule({
   imports: [
@@ -16,8 +16,8 @@ import { DeleteExchangeRate } from '@exchange/application/services/delete-exchan
   ],
   providers: [ExchangeRepositoryImpl],
   usecases: [
-    GetAllExchangeRates,
-    CreateExchangeRate,
+    FindAllExchangeRates,
+    UpsertExchangeRate,
     GetExchangeRate,
     DeleteExchangeRate,
   ],
