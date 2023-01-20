@@ -5,7 +5,6 @@ export class ReferenceDate {
 
   constructor(date: Date) {
     this.date = date;
-    console.log(date);
   }
 
   static fromDate(date: Date) {
