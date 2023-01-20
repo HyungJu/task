@@ -8,8 +8,8 @@ type CurrencySchema {
 }
 
 type ExchangeInfo {
-  from: CurrencySchema!
-  to: CurrencySchema!
+  src: String!
+  tgt: String!
   rate: Float!
   date: String!
 }

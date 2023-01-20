@@ -1,13 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { CurrencySchema } from '../../../currency/presentation/schemas/currency.schema';
 
 @ObjectType('ExchangeInfo')
 export class ExchangeRateSchema {
-  @Field(() => CurrencySchema)
-  public from!: CurrencySchema;
+  @Field()
+  public src!: string;
 
-  @Field(() => CurrencySchema)
-  public to!: CurrencySchema;
+  @Field()
+  public tgt!: string;
 
   @Field()
   public rate!: number;
