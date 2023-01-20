@@ -4,7 +4,6 @@ import { CreateExchangeRate } from '../../application/services/create-exchange-r
 import { CreateExchangeRateSchema } from '../schemas/create-exchange';
 import { ExchangeRateSchema } from '../schemas/exchange-rate.dto';
 import { GetExchangeRate } from '../../application/services/get-exchange-rate';
-import { GetExchangeRateInput } from '../schemas/get-exchange-rate';
 import { ExchangeSchemaMapper } from '@exchange/presentation/mapper';
 import { DeleteExchangeRateSchema } from '@exchange/presentation/schemas/delete-exchange';
 import { DeleteExchangeRate } from '@exchange/application/services/delete-exchange-rate';
@@ -26,29 +25,44 @@ export class ExchangeResolver {
   }
 
   @Query(() => ExchangeRateSchema, { nullable: true })
-  async exchangeRate(
-    @Args('input') input: GetExchangeRateInput,
+  async getExchangeRate(
+    @Args('src') source: string,
+    @Args('tgt') target: string,
+    @Args('date', { nullable: true }) date?: string,
   ): Promise<ExchangeRateSchema> {
     return ExchangeSchemaMapper.toSchema(
-      await this.getExchangeRateService.execute(input),
+      await this.getExchangeRateService.execute({
+        from: source,
+        to: target,
+        date: date,
+      }),
     );
   }
 
-  @Mutation((returns) => ExchangeRateSchema)
-  async createExchangeRate(
-    @Args('input') input: CreateExchangeRateSchema,
+  @Mutation(() => ExchangeRateSchema)
+  async postExchangeRate(
+    @Args('info') input: CreateExchangeRateSchema,
   ): Promise<ExchangeRateSchema> {
     return ExchangeSchemaMapper.toSchema(
-      await this.createExchangeRateService.execute(input),
+      await this.createExchangeRateService.execute({
+        from: input.src,
+        to: input.tgt,
+        rate: input.rate,
+        date: input.date,
+      }),
     );
   }
 
-  @Mutation((returns) => ExchangeRateSchema)
+  @Mutation(() => ExchangeRateSchema)
   async deleteExchangeRate(
-    @Args('input') input: DeleteExchangeRateSchema,
+    @Args('info') input: DeleteExchangeRateSchema,
   ): Promise<ExchangeRateSchema> {
     return ExchangeSchemaMapper.toSchema(
-      await this.deleteExchangeRateService.execute(input),
+      await this.deleteExchangeRateService.execute({
+        from: input.src,
+        to: input.tgt,
+        date: input.date,
+      }),
     );
   }
 }

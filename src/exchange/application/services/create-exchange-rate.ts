@@ -25,7 +25,6 @@ export class CreateExchangeRate
     const referenceDate = dto.date
       ? ReferenceDate.fromString(dto.date)
       : new ReferenceDate(new Date());
-
     const exchangeRate = new ExchangeRate(from, to, dto.rate, referenceDate);
 
     return this.exchangeRepository.create(exchangeRate);

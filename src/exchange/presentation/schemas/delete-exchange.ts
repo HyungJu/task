@@ -1,12 +1,12 @@
 import { Field, InputType } from '@nestjs/graphql';
 
-@InputType()
+@InputType('InputDeleteExchangeInfo')
 export class DeleteExchangeRateSchema {
   @Field()
-  from!: string;
+  src!: string;
 
   @Field()
-  to!: string;
+  tgt!: string;
 
   @Field()
   date!: string;

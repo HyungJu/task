@@ -1,12 +1,12 @@
 import { Field, InputType } from '@nestjs/graphql';
 
-@InputType()
+@InputType('InputUpdateExchangeInfo')
 export class CreateExchangeRateSchema {
   @Field()
-  from!: string;
+  src!: string;
 
   @Field()
-  to!: string;
+  tgt!: string;
 
   @Field()
   rate!: number;

@@ -7,7 +7,7 @@ type CurrencySchema {
   name: String!
 }
 
-type ExchangeRateSchema {
+type ExchangeInfo {
   from: CurrencySchema!
   to: CurrencySchema!
   rate: Float!
@@ -17,21 +17,15 @@ type ExchangeRateSchema {
 type Query {
   currency(code: String!): CurrencySchema
   currencies: [CurrencySchema!]!
-  exchangeRates: [ExchangeRateSchema]!
-  exchangeRate(input: GetExchangeRateInput!): ExchangeRateSchema
-}
-
-input GetExchangeRateInput {
-  from: String!
-  to: String!
-  date: String
+  exchangeRates: [ExchangeInfo]!
+  getExchangeRate(src: String!, tgt: String!, date: String): ExchangeInfo
 }
 
 type Mutation {
   createCurrency(createCurrencyInput: CreateCurrencyInput!): CurrencySchema!
   deleteCurrency(code: String!): Boolean!
-  createExchangeRate(input: CreateExchangeRateSchema!): ExchangeRateSchema!
-  deleteExchangeRate(input: DeleteExchangeRateSchema!): ExchangeRateSchema!
+  postExchangeRate(info: InputUpdateExchangeInfo!): ExchangeInfo!
+  deleteExchangeRate(info: InputDeleteExchangeInfo!): ExchangeInfo!
 }
 
 input CreateCurrencyInput {
@@ -39,15 +33,15 @@ input CreateCurrencyInput {
   name: String!
 }
 
-input CreateExchangeRateSchema {
-  from: String!
-  to: String!
+input InputUpdateExchangeInfo {
+  src: String!
+  tgt: String!
   rate: Float!
   date: String
 }
 
-input DeleteExchangeRateSchema {
-  from: String!
-  to: String!
+input InputDeleteExchangeInfo {
+  src: String!
+  tgt: String!
   date: String!
 }
