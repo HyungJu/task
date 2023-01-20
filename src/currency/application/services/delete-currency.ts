@@ -3,10 +3,15 @@ import { CurrencyRepositoryImpl } from '../../infrastructure/repository/currency
 import { ApplicationService } from '../../../core/application-service';
 
 @Injectable()
-export class CreateCurrency implements ApplicationService<string, void> {
+export class DeleteCurrency implements ApplicationService<string, boolean> {
   constructor(private currencyRepository: CurrencyRepositoryImpl) {}
 
   public async execute(code: string) {
-    return this.currencyRepository.removeByCode(code);
+    try {
+      await this.currencyRepository.removeByCode(code);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

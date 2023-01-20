@@ -14,6 +14,7 @@ type Query {
 
 type Mutation {
   createCurrency(createCurrencyInput: CreateCurrencyInput!): CurrencySchema!
+  deleteCurrency(code: String!): Boolean!
 }
 
 input CreateCurrencyInput {
