@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Currency } from '../../domain/models/currency.model';
 import { CurrencyRepositoryImpl } from '../../infrastructure/repository/currency.repository';
 import { DuplicateCurrencyCodeException } from '../../domain/exceptions/DuplicateCurrencyCodeException';
-import { ApplicationService } from '../../../core/application-service';
+import { ApplicationService } from '@core/application-service';
 
 export class CreateCurrencyInputDto {
   code!: string;

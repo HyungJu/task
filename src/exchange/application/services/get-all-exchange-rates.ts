@@ -1,4 +1,4 @@
-import { ApplicationService } from '../../../core/application-service';
+import { ApplicationService } from '@core/application-service';
 import { Injectable } from '@nestjs/common';
 import { ExchangeRate } from '../../domain/models/exchange.model';
 import { ExchangeRepositoryImpl } from '../../infrastructure/repository/exchange.repository';

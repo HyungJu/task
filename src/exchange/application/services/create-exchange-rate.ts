@@ -1,8 +1,8 @@
-import { ApplicationService } from '../../../core/application-service';
+import { ApplicationService } from '@core/application-service';
 import { Injectable } from '@nestjs/common';
 import { ExchangeRate } from '../../domain/models/exchange.model';
 import { ExchangeRepositoryImpl } from '../../infrastructure/repository/exchange.repository';
-import { FindCurrency } from '../../../currency/application/services/find-currency';
+import { FindCurrency } from '@currency/application/services/find-currency';
 import { CurrencyNotFouncException } from '@exchange/domain/exceptions/CurrencyNotFouncException';
 import { CreateExchangeRateInput } from '@exchange/application/dtos/create-exchange-rate.dto';
 import { ReferenceDate } from '@exchange/domain/models/reference-date.model';

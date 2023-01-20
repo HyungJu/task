@@ -5,13 +5,19 @@ export type GqlModuleMetadata = ModuleMetadata & {
   usecases?: any[];
 };
 
-export function GqlModule(metadata: GqlModuleMetadata): ClassDecorator {
+export function GqlModule(
+  this: any,
+  metadata: GqlModuleMetadata,
+): ClassDecorator {
   return Module.call(this, {
     imports: metadata.imports,
     controllers: metadata.controllers,
     providers: [
+      // @ts-ignore
       ...metadata.resolvers,
+      // @ts-ignore
       ...metadata.usecases,
+      // @ts-ignore
       ...metadata.providers,
     ],
     exports: metadata.exports,

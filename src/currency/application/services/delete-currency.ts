@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CurrencyRepositoryImpl } from '../../infrastructure/repository/currency.repository';
-import { ApplicationService } from '../../../core/application-service';
+import { CurrencyRepositoryImpl } from '@currency/infrastructure/repository/currency.repository';
+import { ApplicationService } from '@core/application-service';
 
 @Injectable()
 export class DeleteCurrency implements ApplicationService<string, boolean> {

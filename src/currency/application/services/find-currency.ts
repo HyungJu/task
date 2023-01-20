@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { Currency } from '../../domain/models/currency.model';
-import { CurrencyRepositoryImpl } from '../../infrastructure/repository/currency.repository';
-import { ApplicationService } from '../../../core/application-service';
+import { Currency } from '@currency/domain/models/currency.model';
+import { CurrencyRepositoryImpl } from '@currency/infrastructure/repository/currency.repository';
+import { ApplicationService } from '@core/application-service';
 
 @Injectable()
 export class FindCurrency
