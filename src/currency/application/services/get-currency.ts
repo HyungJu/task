@@ -6,9 +6,7 @@ import { ApplicationService } from '@core/application-service';
 import { CurrencyNotFoundException } from '@currency/domain/exceptions/CurrencyNotFoundException';
 
 @Injectable()
-export class GetCurrency
-  implements ApplicationService<string, Currency | null>
-{
+export class GetCurrency implements ApplicationService<string, Currency> {
   constructor(private currencyRepository: CurrencyRepositoryImpl) {}
 
   public async execute(code: string): Promise<Currency> {
