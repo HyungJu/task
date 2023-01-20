@@ -5,6 +5,7 @@ import { ExchangeRate } from '../../domain/models/exchange.model';
 import { Currency } from '@currency/domain/models/currency.model';
 import { ExchangeModel } from '@exchange/infrastructure/schemas/exchange.schema';
 import { ExchangeMapper } from '@exchange/infrastructure/mappers';
+import { ReferenceDate } from '@exchange/domain/models/reference-date.model';
 
 @Injectable()
 export class ExchangeRepositoryImpl implements ExchangeRepository {
@@ -22,11 +23,16 @@ export class ExchangeRepositoryImpl implements ExchangeRepository {
     return ExchangeMapper.toModel(exchange);
   }
 
-  public async get(from: Currency, to: Currency): Promise<ExchangeRate> {
+  public async get(
+    from: Currency,
+    to: Currency,
+    date: ReferenceDate,
+  ): Promise<ExchangeRate> {
     const document = await this.exchangeModel
       .findOne({
         from: from._id,
         to: to._id,
+        date: date.toString(),
       })
       .sort({ date: -1 })
       .populate(['from', 'to'])

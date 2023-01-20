@@ -5,6 +5,7 @@ import { ExchangeRepositoryImpl } from '../../infrastructure/repository/exchange
 import { FindCurrency } from '../../../currency/application/services/find-currency';
 import { CurrencyNotFouncException } from '@exchange/domain/exceptions/CurrencyNotFouncException';
 import { GetExchangeRateInput } from '@exchange/application/dtos/get-exchange-rate.dto';
+import { ReferenceDate } from '@exchange/domain/models/reference-date.model';
 
 @Injectable()
 export class GetExchangeRate
@@ -18,8 +19,9 @@ export class GetExchangeRate
   public async execute(input: GetExchangeRateInput): Promise<ExchangeRate> {
     const from = await this.findCurrency.execute(input.from);
     const to = await this.findCurrency.execute(input.to);
+    const date = ReferenceDate.fromString(input.date);
     if (!from || !to) throw new CurrencyNotFouncException();
 
-    return this.exchangeRepository.get(from, to);
+    return this.exchangeRepository.get(from, to, date);
   }
 }

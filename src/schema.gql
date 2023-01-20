@@ -24,6 +24,7 @@ type Query {
 input GetExchangeRateInput {
   from: String!
   to: String!
+  date: String!
 }
 
 type Mutation {
