@@ -15,8 +15,9 @@ export class CurrencyRepositoryImpl implements CurrencyRepository {
 
   public async insert(currency: Currency): Promise<Currency> {
     const schema = CurrencyMapper.toSchema(currency);
+    const document = await this.currencyModel.create(schema);
 
-    return CurrencyMapper.toModel(await this.currencyModel.create(schema));
+    return CurrencyMapper.toModel(document);
   }
 
   public async findByCode(code: string): Promise<Currency | null> {

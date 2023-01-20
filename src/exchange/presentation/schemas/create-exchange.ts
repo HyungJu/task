@@ -12,5 +12,5 @@ export class CreateExchangeRateSchema {
   rate!: number;
 
   @Field({ nullable: true })
-  date?: Date;
+  date?: string;
 }

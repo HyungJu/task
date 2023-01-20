@@ -1,14 +1,14 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Schema, Types } from 'mongoose';
 
-@Schema()
-export class Currency {
-  @Prop({ unique: true, index: true })
-  code!: string;
+export type CurrencyDocument = {
+  _id: Types.ObjectId;
+  code: string;
+  name: string;
+};
 
-  @Prop()
-  name!: string;
-}
+export const CurrencySchema = new Schema<CurrencyDocument>({
+  code: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+});
 
-export const CurrencySchema = SchemaFactory.createForClass(Currency);
-export type CurrencyModel = Model<Currency>;
+export type CurrencyModel = Model<CurrencyDocument>;

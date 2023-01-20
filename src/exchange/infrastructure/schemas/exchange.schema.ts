@@ -1,27 +1,18 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Model } from 'mongoose';
-import { Currency } from '../../../currency/domain/models/currency.model';
+import { Document, Model, PopulatedDoc, Schema, Types } from 'mongoose';
+import { CurrencyDocument } from '@currency/infrastructure/schemas/currency.schema';
 
-@Schema()
-class ExchangeRate {
-  @Prop({
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Currency',
-  })
-  from!: Currency;
+export type ExchangeRateDocument = {
+  from: PopulatedDoc<Document<Types.ObjectId> & CurrencyDocument>;
+  to: PopulatedDoc<Document<Types.ObjectId> & CurrencyDocument>;
+  rate: number;
+  date: Date;
+};
 
-  @Prop({
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Currency',
-  })
-  to!: Currency;
+export const ExchangeSchema = new Schema<ExchangeRateDocument>({
+  from: { type: Schema.Types.ObjectId, required: true, ref: 'Currency' },
+  to: { type: Schema.Types.ObjectId, required: true, ref: 'Currency' },
+  rate: { type: Number, required: true },
+  date: { type: Date, required: true },
+});
 
-  @Prop()
-  rate!: number;
-
-  @Prop()
-  date!: Date;
-}
-
-export const ExchangeSchema = SchemaFactory.createForClass(ExchangeRate);
-export type ExchangeModel = Model<ExchangeRate>;
+export type ExchangeModel = Model<ExchangeRateDocument>;

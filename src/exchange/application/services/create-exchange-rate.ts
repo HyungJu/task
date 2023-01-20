@@ -5,6 +5,7 @@ import { ExchangeRepositoryImpl } from '../../infrastructure/repository/exchange
 import { FindCurrency } from '../../../currency/application/services/find-currency';
 import { CurrencyNotFouncException } from '@exchange/domain/exceptions/CurrencyNotFouncException';
 import { CreateExchangeRateInput } from '@exchange/application/dtos/create-exchange-rate.dto';
+import { ReferenceDate } from '@exchange/domain/models/reference-date.model';
 
 @Injectable()
 export class CreateExchangeRate
@@ -21,7 +22,12 @@ export class CreateExchangeRate
 
     if (!from || !to) throw new CurrencyNotFouncException();
 
-    const exchangeRate = new ExchangeRate(from, to, dto.rate, dto.date);
+    const referenceDate = dto.date
+      ? ReferenceDate.fromString(dto.date)
+      : new ReferenceDate(new Date());
+
+    const exchangeRate = new ExchangeRate(from, to, dto.rate, referenceDate);
+
     return this.exchangeRepository.create(exchangeRate);
   }
 }

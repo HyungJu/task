@@ -5,7 +5,7 @@ export class Currency {
 
   readonly name!: string;
 
-  constructor(id: string, code: string, name: string) {
+  constructor(id: string | undefined, code: string, name: string) {
     this._id = id;
     this.code = code;
     this.name = name;

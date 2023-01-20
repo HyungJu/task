@@ -6,7 +6,7 @@ import { CreateCurrencyInput } from '../schemas/create-currency.schema';
 import { CreateCurrency } from '../../application/services/create-currency';
 import { DeleteCurrency } from '../../application/services/delete-currency';
 
-@Resolver((of) => CurrencySchema)
+@Resolver(() => CurrencySchema)
 export class CurrencyResolver {
   constructor(
     private findCurrencyService: FindCurrency,
@@ -15,10 +15,10 @@ export class CurrencyResolver {
     private deleteCurrencyService: DeleteCurrency,
   ) {}
 
-  @Query((returns) => CurrencySchema, { nullable: true })
+  @Query(() => CurrencySchema, { nullable: true })
   async currency(
     @Args('code', { type: () => String }) code: string,
-  ): Promise<CurrencySchema> {
+  ): Promise<CurrencySchema | null> {
     return this.findCurrencyService.execute(code);
   }
 
@@ -27,14 +27,14 @@ export class CurrencyResolver {
     return this.getAllCurrenciesService.execute();
   }
 
-  @Mutation((returns) => CurrencySchema)
+  @Mutation(() => CurrencySchema)
   async createCurrency(
     @Args('createCurrencyInput') input: CreateCurrencyInput,
   ): Promise<CurrencySchema> {
     return this.createCurrencyService.execute(input);
   }
 
-  @Mutation((returns) => Boolean)
+  @Mutation(() => Boolean)
   deleteCurrency(
     @Args('code', { type: () => String }) code: string,
   ): Promise<boolean> {

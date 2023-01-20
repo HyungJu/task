@@ -5,8 +5,9 @@ import { CreateExchangeRateSchema } from '../schemas/create-exchange';
 import { ExchangeRateSchema } from '../schemas/exchange-rate.dto';
 import { GetExchangeRate } from '../../application/services/get-exchange-rate';
 import { GetExchangeRateInput } from '../schemas/get-exchange-rate';
+import { ExchangeSchemaMapper } from '@exchange/presentation/mapper';
 
-@Resolver((of) => ExchangeRateSchema)
+@Resolver(() => ExchangeRateSchema)
 export class ExchangeResolver {
   constructor(
     private getAllExchangeRatesService: GetAllExchangeRates,
@@ -15,17 +16,27 @@ export class ExchangeResolver {
   ) {}
 
   @Query(() => [ExchangeRateSchema], { nullable: 'items' })
-  async exchangeRates() {
-    return this.getAllExchangeRatesService.execute();
+  async exchangeRates(): Promise<ExchangeRateSchema[]> {
+    return (await this.getAllExchangeRatesService.execute()).map(
+      ExchangeSchemaMapper.toSchema,
+    );
   }
 
   @Query(() => ExchangeRateSchema, { nullable: true })
-  async exchangeRate(@Args('input') input: GetExchangeRateInput) {
-    return this.getExchangeRateService.execute(input);
+  async exchangeRate(
+    @Args('input') input: GetExchangeRateInput,
+  ): Promise<ExchangeRateSchema> {
+    return ExchangeSchemaMapper.toSchema(
+      await this.getExchangeRateService.execute(input),
+    );
   }
 
   @Mutation((returns) => ExchangeRateSchema)
-  createExchangeRate(@Args('input') input: CreateExchangeRateSchema) {
-    return this.createExchangeRateService.execute(input);
+  async createExchangeRate(
+    @Args('input') input: CreateExchangeRateSchema,
+  ): Promise<ExchangeRateSchema> {
+    return ExchangeSchemaMapper.toSchema(
+      await this.createExchangeRateService.execute(input),
+    );
   }
 }

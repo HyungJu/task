@@ -4,11 +4,14 @@ import { CurrencySchema } from '../../../currency/presentation/schemas/currency.
 @ObjectType()
 export class ExchangeRateSchema {
   @Field(() => CurrencySchema)
-  private from: CurrencySchema;
+  public from!: CurrencySchema;
+
   @Field(() => CurrencySchema)
-  private to: CurrencySchema;
+  public to!: CurrencySchema;
+
   @Field()
-  private rate: number;
+  public rate!: number;
+
   @Field()
-  private date: Date;
+  public date!: string;
 }
