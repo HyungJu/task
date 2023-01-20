@@ -8,13 +8,20 @@ import { GetAllCurrencies } from './application/services/get-all-currencies';
 import { CurrencyRepositoryImpl } from './infrastructure/repository/currency.repository';
 import { GqlModule } from '../core/module.decorator';
 import { DeleteCurrency } from './application/services/delete-currency';
+import { GetCurrency } from '@currency/application/services/get-currency';
 
 @GqlModule({
   imports: [
     MongooseModule.forFeature([{ name: 'Currency', schema: CurrencySchema }]),
   ],
   providers: [CurrencyRepositoryImpl],
-  usecases: [CreateCurrency, FindCurrency, GetAllCurrencies, DeleteCurrency],
+  usecases: [
+    CreateCurrency,
+    FindCurrency,
+    GetAllCurrencies,
+    DeleteCurrency,
+    GetCurrency,
+  ],
   resolvers: [CurrencyResolver],
   controllers: [],
   exports: [FindCurrency],
