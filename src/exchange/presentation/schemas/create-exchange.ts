@@ -3,11 +3,14 @@ import { Field, InputType } from '@nestjs/graphql';
 @InputType()
 export class CreateExchangeRateSchema {
   @Field()
-  from: string;
+  from!: string;
+
   @Field()
-  to: string;
+  to!: string;
+
   @Field()
-  rate: number;
-  @Field()
-  date: Date;
+  rate!: number;
+
+  @Field({ nullable: true })
+  date?: Date;
 }
