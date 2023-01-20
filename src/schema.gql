@@ -1,0 +1,13 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CurrencyGqlSchema {
+  code: String!
+  name: String!
+}
+
+type Query {
+  currency(code: String!): CurrencyGqlSchema
+  currencies: [CurrencyGqlSchema!]!
+}
