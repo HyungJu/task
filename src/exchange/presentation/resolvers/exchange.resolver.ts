@@ -19,9 +19,8 @@ export class ExchangeResolver {
 
   @Query(() => [ExchangeRateSchema], { nullable: 'items' })
   async exchangeRates(): Promise<ExchangeRateSchema[]> {
-    return (await this.getAllExchangeRatesService.execute()).map(
-      ExchangeSchemaMapper.toSchema,
-    );
+    const exchangeRates = await this.getAllExchangeRatesService.execute();
+    return exchangeRates.map(ExchangeSchemaMapper.toSchema);
   }
 
   @Query(() => ExchangeRateSchema, { nullable: true })
