@@ -25,7 +25,6 @@ export class CurrencyResolver {
 
   @Mutation((returns) => CurrencySchema)
   createCurrency(@Args('createCurrencyInput') input: CreateCurrencyInput) {
-    console.log(input);
     return this.createCurrencyService.execute(input);
   }
 }

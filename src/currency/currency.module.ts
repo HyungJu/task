@@ -6,7 +6,7 @@ import { CurrencyResolver } from './presentation/resolvers/currency.resolvers';
 import { FindCurrency } from './application/services/find-currency';
 import { GetAllCurrencies } from './application/services/get-all-currencies';
 import { CurrencyRepositoryImpl } from './infrastructure/repository/currency.repository';
-import { GqlModule } from '../utill/module.decorator';
+import { GqlModule } from '../core/module.decorator';
 
 @GqlModule({
   imports: [
